@@ -43,7 +43,9 @@
     IGParameterAssert(view != nil);
     IGParameterAssert(listAdapter != nil);
     IGParameterAssert(object != nil);
-    IGParameterAssert(indexPath != nil);
+    if (indexPath == nil) {
+      return;
+    }
 
     [self.visibleViewObjectMap setObject:object forKey:view];
     NSCountedSet *visibleListSections = self.visibleListSections;
@@ -61,9 +63,8 @@
                            indexPath:(NSIndexPath *)indexPath {
     IGParameterAssert(view != nil);
     IGParameterAssert(listAdapter != nil);
-    IGParameterAssert(indexPath != nil);
 
-    if (object == nil || sectionController == nil) {
+    if (object == nil || sectionController == nil || indexPath == nil) {
         return;
     }
 

@@ -67,9 +67,11 @@ typedef std::unordered_set<_IGListWorkingRangeHandlerIndexPath, _IGListWorkingRa
 
 - (void)willDisplayItemAtIndexPath:(NSIndexPath *)indexPath
                     forListAdapter:(IGListAdapter *)listAdapter {
-    IGParameterAssert(indexPath != nil);
     IGParameterAssert(listAdapter != nil);
-
+    if (indexPath == nil) {
+      return;
+    }
+    
     _visibleSectionIndices.insert({
         .section = indexPath.section,
         .row = indexPath.row,
@@ -81,8 +83,11 @@ typedef std::unordered_set<_IGListWorkingRangeHandlerIndexPath, _IGListWorkingRa
 
 - (void)didEndDisplayingItemAtIndexPath:(NSIndexPath *)indexPath
                          forListAdapter:(IGListAdapter *)listAdapter {
-    IGParameterAssert(indexPath != nil);
     IGParameterAssert(listAdapter != nil);
+  
+    if (indexPath == nil) {
+      return;
+    }
 
     _visibleSectionIndices.erase({
         .section = indexPath.section,
